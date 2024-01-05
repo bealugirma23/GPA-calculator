@@ -25,9 +25,7 @@ function Home() {
       newSemesters[semesterIndex] = {
         ...newSemesters[semesterIndex],
         courses: [...newSemesters[semesterIndex].courses, course],
-        totalCredits:
-          newSemesters[semesterIndex].totalCredits +
-          parseFloat(course.creditHours),
+        totalCredits: newSemesters[semesterIndex].totalCredits + parseFloat(course.creditHours),
       };
       return newSemesters;
     });
@@ -35,6 +33,7 @@ function Home() {
     setTotalCredits(
       (prevTotalCredits) => prevTotalCredits + parseFloat(course.creditHours)
     );
+    
   };
   function calculate() {
     var scale = {
@@ -52,7 +51,7 @@ function Home() {
     };
   }
   return (
-    <div className="flex-col z-40 xl:px-[4.8rem] overflow-x-auto min-h-screen">
+    <div className="flex-col  xl:px-[4.8rem] overflow-x-auto min-h-screen">
       <p className="text-white dark:text-black text-justify text-xl xl:text-3xl px-7 mt-6 ">
         The grade chart below shows the scale that will be used to calculate
         your grade point average. You only need to worry about selecting your
