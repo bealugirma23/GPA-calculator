@@ -1,0 +1,159 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* CSS Reset */
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+/* Set box sizing to border-box for all elements */
+* {
+  box-sizing: border-box;
+}
+
+/* Remove list styling */
+ul,
+ol {
+  list-style: none;
+}
+
+/* Remove default margins on body */
+body {
+  margin: 0;
+}
+
+/* Set default font family and size */
+body {
+  font-family: "Arial", sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+/* Set default link styles */
+a {
+  text-decoration: none;
+  color: #007bff;
+}
+
+/* Responsive Grid System */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -10px;
+}
+
+.col {
+  flex: 1;
+  padding: 0 10px;
+}
+
+.gradient-07 {
+  position: absolute;
+  width: 304px;
+  height: 100vh;
+  left: -9vh;
+  top: -8vh;
+  z-index: 0;
+  background: #00bfff;
+  filter: blur(200px);
+  transform: rotate(-53.13deg);
+}
+
+/* Example Usage:
+   <div class="container">
+     <div class="row">
+       <div class="col">Content goes here</div>
+       <div class="col">More content goes here</div>
+     </div>
+   </div>
+*/
