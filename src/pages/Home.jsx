@@ -240,7 +240,7 @@ function Home() {
                           }
                           className="justify-center items-center w-auto rounded bg-red-500 flex  flex-col p-2 self-start"
                         >
-                          <FaPlus size={15} />
+                          <FaPlus style={{transform: 'rotate(40deg)' }} size={15} />
                         </button>
                       </th>
                     </tr>
