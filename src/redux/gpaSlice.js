@@ -11,10 +11,14 @@ const gpaSlice = createSlice({
   },
   reducers: {
     addCourse: (state, action) => {
-      // Your existing addCourse logic
+      const { semesterIndex, course } = action.payload;
+      state.semesters[semesterIndex].courses.push(course);
+      // Your existing logic to update totalCredits, totalGradePoints, and semigpa
     },
     removeCourse: (state, action) => {
-      // Your existing removeCourse logic
+      const { semesterIndex, courseIndex } = action.payload;
+      state.semesters[semesterIndex].courses.splice(courseIndex, 1);
+      // Your existing logic to update totalCredits, totalGradePoints, and semigpa
     },
   },
 });

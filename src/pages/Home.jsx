@@ -271,13 +271,15 @@ function Home() {
           </div>
         </div>
       </div>
-      <Footer
-        totalCredits={semesters.reduce(
-          (sum, semester) => sum + semester.totalCredits,
-          0
-        )}
-        cumulativeGPA={calculateCumulativeGPA()}
-      />
+      <div className="mt-6">
+        <Footer
+          totalCredits={semesters.reduce(
+            (sum, semester) => sum + semester.totalCredits,
+            0
+          )}
+          cumulativeGPA={calculateCumulativeGPA()}
+        />
+      </div>
     </div>
   );
 }
