@@ -145,10 +145,9 @@ function Home() {
     <div className="flex-col  xl:px-[4.8rem] overflow-x-auto min-h-screen">
       <h3 className="text-white text-[48px] px-7 font-bold">Welcome</h3>
       <p className="text-[#888888] dark:text-black xl:w-[88rem] text-justify text-xl xl:text-[16px] px-7 ">
-        The grade chart below shows the scale that will be used to calculate
-        your grade point average. You only need to worry about selecting your
-        grade scale if you intend to enter information in step 4 below. Grade
-        Points Every card holds a semistor and one row holds one year... enjoy
+        The table below shows the total credit and total gpa of a semistor. You only need to
+        worry about selecting your grade scale. Every table holds a semistor
+        ... enjoy
       </p>
       {/* <div className="px-64 py-10">
           <hr></hr>
