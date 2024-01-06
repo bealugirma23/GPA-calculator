@@ -28,20 +28,18 @@ const Header = (onoff) => {
         </div>
       </div>
 
-      <ul className="self-center xl:w-[12.8rem] flex w-full  justify-center xl:justify-between gap-5 my-auto">
+      {/* <ul className="self-center xl:w-[12.8rem] flex w-full  justify-center xl:justify-between gap-5 my-auto">
         <li>
           <a
             href="/"
             className={`text-center  text-2xl font-bold leading-10 tracking-tighter hover:underline ${
-              currentPath === "/"
-                ? "text-blue-500 "
-                : "text-white"
+              currentPath === "/" ? "text-blue-500 " : "text-white"
             }`}
           >
             HOME
           </a>
         </li>
-        <li>
+        {/* <li>
           <a
             href="/about"
             className={`text-center text-2xl font-bold leading-10 tracking-tighter hover:underline ${
@@ -52,7 +50,7 @@ const Header = (onoff) => {
           >
             ABOUT
           </a>
-        </li>
+        </li> */}
         {/* <li>
           <label class="relative inline-flex items-center cursor-pointer">
             <input type="checkbox" value="" class="sr-only peer" />
@@ -60,7 +58,7 @@ const Header = (onoff) => {
             
           </label>
         </li> */}
-      </ul>
+      {/* </ul> */} 
     </nav>
   );
 };
