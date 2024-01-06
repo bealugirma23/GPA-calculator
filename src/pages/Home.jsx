@@ -219,10 +219,18 @@ function Home() {
               <table className="w-full table-white mt-5 text-white border  p-2 border-solid border-[#626262] ">
                 <thead>
                   <tr>
-                    <th scope="col">index</th>
-                    <th scope="col">Courses</th>
-                    <th scope="col">Grade</th>
-                    <th scope="col">Credits</th>
+                    <th scope="col" className="font-bold">
+                      index
+                    </th>
+                    <th scope="col" className="font-bold">
+                      Courses
+                    </th>
+                    <th scope="col" className="font-bold">
+                      Grade
+                    </th>
+                    <th scope="col" className="font-bold">
+                      Credits
+                    </th>
                   </tr>
                 </thead>
                 {/* Render your course data here */}
@@ -240,7 +248,10 @@ function Home() {
                           }
                           className="justify-center items-center w-auto rounded bg-red-500 flex  flex-col p-2 self-start"
                         >
-                          <FaPlus style={{transform: 'rotate(40deg)' }} size={15} />
+                          <FaPlus
+                            style={{ transform: "rotate(40deg)" }}
+                            size={15}
+                          />
                         </button>
                       </th>
                     </tr>
