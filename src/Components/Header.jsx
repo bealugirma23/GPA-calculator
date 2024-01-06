@@ -8,7 +8,7 @@ const Header = (onoff) => {
     setCurrentPath(path);
   }, []);
   return (
-    <nav className="px-6 py-3 z-30 flex w-full justify-between gap-5  max-md:max-w-full max-md:flex-wrap">
+    <nav className="px-6 bg-[#191919] py-3 z-30 flex w-full justify-between gap-5 border-b border-solid border-gray-600 max-md:max-w-full max-md:flex-wrap">
       <div className=" flex xl:flex-col justify-center  w-full">
         <div className="flex  w-[13.8rem] ">
           <img
@@ -34,7 +34,7 @@ const Header = (onoff) => {
             href="/"
             className={`text-center  text-2xl font-bold leading-10 tracking-tighter hover:underline ${
               currentPath === "/"
-                ? "text-blue-500 underline decoration-wavy"
+                ? "text-blue-500 "
                 : "text-white"
             }`}
           >
@@ -46,7 +46,7 @@ const Header = (onoff) => {
             href="/about"
             className={`text-center text-2xl font-bold leading-10 tracking-tighter hover:underline ${
               currentPath === "/about"
-                ? "text-blue-500 underline decoration-wavy"
+                ? "text-blue-500 "
                 : "text-white "
             }`}
           >

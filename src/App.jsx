@@ -8,7 +8,7 @@ function App() {
   const [dark, setdark] = useState("dark");
    const [isDarkMode, setIsDarkMode] = useState(false);
   return (
-    <div class={dark} className={`${dark ? "bg-black": "bg-white"}`}>
+    <div class={dark} className={`${dark ? "bg-[#141414]": "bg-white"}`}>
      
       <BrowserRouter>
         <Header />

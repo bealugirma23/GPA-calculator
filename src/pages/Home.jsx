@@ -30,9 +30,7 @@ function Home() {
       return newSemesters;
     });
     // Update totalCredits
-    setTotalCredits(
-      (prevTotalCredits) => prevTotalCredits + parseFloat(course.creditHours)
-    );
+ 
     
   };
   function calculate() {
@@ -52,19 +50,24 @@ function Home() {
   }
   return (
     <div className="flex-col  xl:px-[4.8rem] overflow-x-auto min-h-screen">
-      <p className="text-white dark:text-black text-justify text-xl xl:text-3xl px-7 mt-6 ">
+      <h3 className="text-white text-[48px] px-7 font-bold">Welcome</h3>
+      <p className="text-[#888888] dark:text-black xl:w-[88rem] text-justify text-xl xl:text-[16px] px-7 ">
         The grade chart below shows the scale that will be used to calculate
         your grade point average. You only need to worry about selecting your
         grade scale if you intend to enter information in step 4 below. Grade
         Points Every card holds a semistor and one row holds one year... enjoy
       </p>
+      {/* <div className="px-64 py-10">
+          <hr></hr>
+      </div> */}
+    
       <div className="mt-8">
         <div className="grid grid-cols-1 gap-7 mx-8 xl:grid-cols-4">
           {semesters.map((semester, index) => (
             <div className="" key={index}>
-              <div className="text-white text-2xl font-bold uppercase">
+              <h5 className="text-white text-[24px] font-bold uppercase">
                 {semester.semester}
-              </div>
+              </h5>
               <form
                 onSubmit={(e) => {
                   e.preventDefault();
@@ -76,7 +79,7 @@ function Home() {
                   addCourse(index, course);
                 }}
               >
-                <div className="items-stretch flex justify-between gap-3.5 mt-5  px-3.5 py-2.5 rounded border border-solid border-white">
+                <div className="items-stretch flex justify-between gap-3.5 mt-5  px-3.5 py-2.5 bg-[#272628] rounded-xl border border-solid border-[#626262]">
                   <div className="items-stretch flex gap-3.5 pr-6 max-md:pr-5">
                     <input
                       type="text"
@@ -89,7 +92,7 @@ function Home() {
                       type="text"
                       name="grade"
                       onChange={calculate()}
-                      className="justify-center text-white bg-black h-11 items-stretch border flex gap-1.5 px-2 py-2 rounded border-solid border-white self-start"
+                      className="justify-center text-white bg-[#272628] h-11 items-stretch border flex gap-1.5 px-2 py-2 rounded border-solid border-white self-start"
                       id="select"
                     >
                       <option value="4">A+</option>
@@ -121,8 +124,8 @@ function Home() {
                 </div>
               </form>
 
-              <table className="w-full table-white mt-5 text-white border border-solid border-white">
-                <thead>
+              <table className="w-full table-white mt-5 text-white border  p-2 border-solid border-[#626262] ">
+                <thead >
                   <tr>
                     <th scope="col">index</th>
                     <th scope="col">Courses</th>
@@ -152,9 +155,9 @@ function Home() {
               <div className="border flex w-full flex-col items-stretch  rounded ">
                 <div className="justify-between items-stretch content-center flex-wrap flex gap-5 mt-5 px-9 ">
                   <div className="text-white text-2xl font-bold">Total</div>
-                  <div className="text-amber-500 text-2xl">{totalCredits}</div>
+                  <div className="text-blue-400 text-2xl">{totalCredits}</div>
                   <div className="text-white text-2xl font-bold">GPA</div>
-                  <div className="text-amber-500 text-2xl">3.97</div>
+                  <div className="text-blue-400 text-2xl">3.97</div>
                 </div>
               </div>
             </div>
