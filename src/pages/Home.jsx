@@ -1,12 +1,18 @@
 import { CgAdd } from "react-icons/cg";
 import { FaPlus } from "react-icons/fa6";
 import { useState } from "react";
-
+import Footer from "../Components/Footer";
 function Home() {
   const [semesters, setSemesters] = useState([
-    { semester: "1st year 1nd Semester", courses: [] },
+    {
+      semester: "1st year 1nd Semester",
+      courses: [],
+      totalCredits: 0,
+      semigpa: 0,
+      totalGradePoints: 0,
+    },
   ]);
-  const [totalCredits, setTotalCredits] = useState(0);
+
   const addSemester = () => {
     setSemesters((prevSemesters) => [
       ...prevSemesters,
@@ -15,6 +21,9 @@ function Home() {
           prevSemesters.length + 1
         }nd Semester `,
         courses: [],
+        totalCredits: 0,
+        totalGradePoints: 0,
+        semigpa: 0,
       },
     ]);
   };
@@ -22,32 +31,116 @@ function Home() {
   const addCourse = (semesterIndex, course) => {
     setSemesters((prevSemesters) => {
       const newSemesters = [...prevSemesters];
-      newSemesters[semesterIndex] = {
-        ...newSemesters[semesterIndex],
-        courses: [...newSemesters[semesterIndex].courses, course],
-        totalCredits: newSemesters[semesterIndex].totalCredits + parseFloat(course.creditHours),
+      const semester = newSemesters[semesterIndex];
+
+      const gradePoints = calculateGradePoints(course.grade);
+
+      const updatedSemester = {
+        ...semester,
+        courses: [...semester.courses, course],
+        totalCredits: semester.totalCredits + parseFloat(course.creditHours),
+        totalGradePoints:
+          semester.totalGradePoints +
+          parseFloat(course.creditHours) * gradePoints,
       };
+
+      console.log("totalCredits:", updatedSemester.totalCredits);
+      console.log("totalGradePoints:", updatedSemester.totalGradePoints);
+      updatedSemester.semigpa =
+        updatedSemester.totalGradePoints / updatedSemester.totalCredits;
+
+      console.log("semigpa:", updatedSemester.semigpa);
+
+      newSemesters[semesterIndex] = updatedSemester;
       return newSemesters;
     });
-    // Update totalCredits
- 
-    
   };
-  function calculate() {
-    var scale = {
-      "A+": 4.0,
-      A: 4.0,
-      "A-": 3.75,
-      "B+": 3.5,
-      B: 3.0,
-      "B-": 2.75,
-      "C+": 2.5,
-      C: 2,
-      "C-": 1.75,
-      D: 1.5,
-      F: 0,
-    };
-  }
+
+  const calculateGradePoints = (grade) => {
+    switch (grade) {
+      case "A+":
+      case "A":
+        return 4.0;
+      case "A-":
+        return 3.75;
+      case "B+":
+        return 3.5;
+      case "B":
+        return 3.0;
+      case "B-":
+        return 2.75;
+      case "C+":
+        return 2.5;
+      case "C":
+        return 2.0;
+      case "C-":
+        return 1.75;
+      case "D":
+        return 1.5;
+      case "F":
+        return 0;
+      default:
+        return 0;
+    }
+  };
+
+  const calculateCumulativeGPA = () => {
+    const totalGradePoints = semesters.reduce(
+      (sum, semester) => sum + semester.totalGradePoints,
+      0
+    );
+    const totalCredits = semesters.reduce(
+      (sum, semester) => sum + semester.totalCredits,
+      0
+    );
+
+    if (totalCredits === 0) {
+      return 0; // Avoid division by zero
+    }
+
+    return totalGradePoints / totalCredits;
+  };
+
+  const handleRemoveCourse = (semesterIndex, courseIndex) => {
+    setSemesters((prevSemesters) => {
+      const newSemesters = [...prevSemesters];
+      const semester = newSemesters[semesterIndex];
+
+      // Create a new array without the course to be removed
+      const updatedCourses = semester.courses.filter(
+        (_, index) => index !== courseIndex
+      );
+
+      // Calculate totalCredits and semigpa after removing the course
+      const updatedSemester = {
+        ...semester,
+        courses: updatedCourses,
+        totalCredits: updatedCourses.reduce(
+          (sum, course) => sum + parseFloat(course.creditHours),
+          0
+        ),
+      };
+
+      // Check if there are courses left to avoid division by zero
+      if (updatedSemester.courses.length > 0) {
+        const totalGradePoints = updatedCourses.reduce((sum, course) => {
+          const gradePoints = calculateGradePoints(course.grade);
+          return sum + parseFloat(course.creditHours) * gradePoints;
+        }, 0);
+
+        updatedSemester.semigpa =
+          totalGradePoints / updatedSemester.totalCredits;
+      } else {
+        // No courses left, reset totalGradePoints and semigpa
+        updatedSemester.totalGradePoints = 0;
+        updatedSemester.semigpa = 0;
+      }
+
+      newSemesters[semesterIndex] = updatedSemester;
+      return newSemesters;
+    });
+  };
+
   return (
     <div className="flex-col  xl:px-[4.8rem] overflow-x-auto min-h-screen">
       <h3 className="text-white text-[48px] px-7 font-bold">Welcome</h3>
@@ -60,11 +153,11 @@ function Home() {
       {/* <div className="px-64 py-10">
           <hr></hr>
       </div> */}
-    
+
       <div className="mt-8">
         <div className="grid grid-cols-1 gap-7 mx-8 xl:grid-cols-4">
-          {semesters.map((semester, index) => (
-            <div className="" key={index}>
+          {semesters.map((semester, semesterIndex) => (
+            <div className="" key={semesterIndex}>
               <h5 className="text-white text-[24px] font-bold uppercase">
                 {semester.semester}
               </h5>
@@ -76,7 +169,7 @@ function Home() {
                     grade: e.target.grade.value,
                     creditHours: e.target.creditHours.value,
                   };
-                  addCourse(index, course);
+                  addCourse(semesterIndex, course);
                 }}
               >
                 <div className="items-stretch flex justify-between gap-3.5 mt-5  px-3.5 py-2.5 bg-[#272628] rounded-xl border border-solid border-[#626262]">
@@ -91,21 +184,20 @@ function Home() {
                     <select
                       type="text"
                       name="grade"
-                      onChange={calculate()}
                       className="justify-center text-white bg-[#272628] h-11 items-stretch border flex gap-1.5 px-2 py-2 rounded border-solid border-white self-start"
                       id="select"
                     >
-                      <option value="4">A+</option>
-                      <option value="4">A</option>
-                      <option value="3.75">A-</option>
-                      <option value="3.5">B+</option>
-                      <option value="3">B</option>
-                      <option value="2.75">B-</option>
-                      <option value="2.5">C+</option>
-                      <option value="2">C</option>
-                      <option value="1.75">C-</option>
-                      <option value="1">D</option>
-                      <option value="0">F</option>
+                      <option value="A+">A+</option>
+                      <option value="A">A</option>
+                      <option value="A-">A-</option>
+                      <option value="B+">B+</option>
+                      <option value="B">B</option>
+                      <option value="B-">B-</option>
+                      <option value="C+">C+</option>
+                      <option value="C">C</option>
+                      <option value="C-">C-</option>
+                      <option value="D">D</option>
+                      <option value="F">F</option>
                     </select>
 
                     <input
@@ -125,7 +217,7 @@ function Home() {
               </form>
 
               <table className="w-full table-white mt-5 text-white border  p-2 border-solid border-[#626262] ">
-                <thead >
+                <thead>
                   <tr>
                     <th scope="col">index</th>
                     <th scope="col">Courses</th>
@@ -142,8 +234,12 @@ function Home() {
                       <th className="grade">{course.grade}</th>
                       <th className="credit">{course.creditHours}</th>
                       <th className="credit">
-                        {" "}
-                        <button className="justify-center items-center w-auto rounded bg-red-500 flex  flex-col p-2 self-start">
+                        <button
+                          onClick={() =>
+                            handleRemoveCourse(semesterIndex, courseIndex)
+                          }
+                          className="justify-center items-center w-auto rounded bg-red-500 flex  flex-col p-2 self-start"
+                        >
                           <FaPlus size={15} />
                         </button>
                       </th>
@@ -155,9 +251,13 @@ function Home() {
               <div className="border flex w-full flex-col items-stretch  rounded ">
                 <div className="justify-between items-stretch content-center flex-wrap flex gap-5 mt-5 px-9 ">
                   <div className="text-white text-2xl font-bold">Total</div>
-                  <div className="text-blue-400 text-2xl">{totalCredits}</div>
+                  <div className="text-blue-400 text-2xl">
+                    {semester.totalCredits}
+                  </div>
                   <div className="text-white text-2xl font-bold">GPA</div>
-                  <div className="text-blue-400 text-2xl">3.97</div>
+                  <div className="text-blue-400 text-2xl">
+                    {semester.semigpa.toFixed(2)}
+                  </div>
                 </div>
               </div>
             </div>
@@ -171,6 +271,13 @@ function Home() {
           </div>
         </div>
       </div>
+      <Footer
+        totalCredits={semesters.reduce(
+          (sum, semester) => sum + semester.totalCredits,
+          0
+        )}
+        cumulativeGPA={calculateCumulativeGPA()}
+      />
     </div>
   );
 }

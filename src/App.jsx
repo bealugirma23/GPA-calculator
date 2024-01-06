@@ -8,7 +8,7 @@ function App() {
   const [dark, setdark] = useState("dark");
    const [isDarkMode, setIsDarkMode] = useState(false);
   return (
-    <div class={dark} className={`${dark ? "bg-[#141414]": "bg-white"}`}>
+    <div className={`${dark ? "bg-[#141414]": "bg-white"}`}>
      
       <BrowserRouter>
         <Header />
@@ -16,7 +16,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
         </Routes>
-        {window.location.pathname !== "/about" && <Footer />}
+        {/* {window.location.pathname !== "/about" && <Footer />} */}
       </BrowserRouter>
     </div>
   );
